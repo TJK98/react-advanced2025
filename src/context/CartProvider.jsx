@@ -27,7 +27,21 @@ const CartProvider = ({children}) => {
 
     // 장바구니에 데이터를 추가하는 함수
     const handleAddToCartItem = (newItem) => {
-        setCartItems([...cartItems, newItem]);
+        // setCartItems([...cartItems, newItem]);
+
+        // 단순히 이어 추가하는 게 아닌
+        // 원본 장바구니 배열 복사
+        const existingItems = [...cartItems];
+        // 이미 장바구니에 있는 항복인지 체크
+        const foundItem = existingItems.find(cartItem => cartItem.id === newItem.id);
+
+        if (foundItem) { // 기존에 있는 아이템
+            foundItem.amount += newItem.amount;
+            foundItem.price += newItem.price;
+            setCartItems(existingItems); // 원본에 수정된 복사 배열 갱신
+        } else { // 새롭게 추가된 아이템
+            setCartItems([...cartItems, newItem]);
+        }
     };
 
     // 모달을 열어주는 함수
