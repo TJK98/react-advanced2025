@@ -22,12 +22,18 @@ const App = () => {
         {/*value 속성에 하위 컴포넌트들이 공유할 상태값들을 명시*/}
         <CartContext.Provider value={{
             // value란 밑에 있는 것들에게 공유할 데이터 객체든 배열이든 전달 가능
-            cartName: 'cart1',
-            amount: 10,
-            isOpen: false,
+            // cartName: 'cart1',
+            // amount: 10,
+            // isOpen: false,
+            openModal: handleShowCart,
+            closeModal: handleHideCart
         }}>
-            {cartIsShown && <Cart onClose={handleHideCart}/>}
-            <Header onShowCart={handleShowCart}/>
+            {/*{cartIsShown && <Cart onClose={handleHideCart}/>}*/}
+            {cartIsShown && <Cart />}
+
+            {/*<Header onShowCart={handleShowCart}/>*/}
+            <Header />
+
             <div id="main">
                 <Meals/>
             </div>

@@ -1,12 +1,10 @@
 import styles from './MealItem.module.scss';
 import MealItemForm from './MealItemForm.jsx';
-import {useContext} from "react";
-import CartContext from "../../context/cart-context.js";
 
 const MealItem = ({ id, price, description, name }) => {
 
-    const x = useContext(CartContext);
-    console.log(x);
+    // const x = useContext(CartContext);
+    // console.log(x);
 
   const { meal, description: desc, price: priceStyle } = styles;
 
