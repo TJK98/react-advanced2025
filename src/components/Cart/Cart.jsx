@@ -2,24 +2,26 @@ import React, {useContext} from 'react';
 import styles from './Cart.module.scss';
 import CartModal from './CartModal';
 import CartContext from "../../context/cart-context.js";
+import CartItem from "./CartItem.jsx";
 
-const DUMMY_CART = [
-    {
-        id: 'c1',
-        name: '스시',
-        amount: 2,
-        price: 46000,
-    },
-    {
-        id: 'c2',
-        name: '띠드버거',
-        amount: 1,
-        price: 12000,
-    },
-];
+// 상위 컴포넌트인 CartProvider가 관리하도록 옮김
+// const DUMMY_CART = [
+//     {
+//         id: 'c1',
+//         name: '스시',
+//         amount: 2,
+//         price: 46000,
+//     },
+//     {
+//         id: 'c2',
+//         name: '띠드버거',
+//         amount: 1,
+//         price: 12000,
+//     },
+// ];
 const Cart = (/*{ onClose }*/) => {
 
-    const { closeModal } = useContext(CartContext);
+    const { closeModal, cartItems } = useContext(CartContext);
 
     const {
         'cart-items': cartItemStyle,
@@ -33,8 +35,9 @@ const Cart = (/*{ onClose }*/) => {
         <CartModal onClose={/*onClose*/ closeModal}>
             {/* 주문 내역 */}
             <ul className={cartItemStyle}>
-                {DUMMY_CART.map((cartItem) => (
-                    <li key={cartItem.id}>{cartItem.name}</li>
+                {cartItems.map((cartItem) => (
+                    // <li key={cartItem.id}>{cartItem.name}</li>
+                    <CartItem key={cartItem.id} cart={cartItem} />
                 ))}
             </ul>
             <div className={total}>

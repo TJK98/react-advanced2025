@@ -9,7 +9,9 @@ const MealItemForm = ({id, onAddToCart}) => {
     const handleSubmit = e => {
         e.preventDefault();
         // onAddToCart(100);
-        onAddToCart(inputRef.current.value)
+
+        // 숫자로 형변환
+        onAddToCart(+inputRef.current.value)
     };
 
     return (
