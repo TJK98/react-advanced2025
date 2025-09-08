@@ -31,6 +31,8 @@ const Cart = (/*{ onClose }*/) => {
         button,
     } = styles;
 
+    const totalPrice = cartItems.reduce((acc, curr) => acc + curr.price, 0);
+
     return (
         <CartModal onClose={/*onClose*/ closeModal}>
             {/* 주문 내역 */}
@@ -42,7 +44,8 @@ const Cart = (/*{ onClose }*/) => {
             </ul>
             <div className={total}>
                 <span>주문 총액</span>
-                <span>58,000원</span>
+                <span>{new Intl.NumberFormat('ko-KR').format(totalPrice)}원</span>
+                {/*<span>58,000원</span>*/}
             </div>
             <div className={actions}>
                 <button className={btnAlt} onClick={/*onClose*/ closeModal}>닫기</button>

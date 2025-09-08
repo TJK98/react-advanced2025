@@ -1,9 +1,14 @@
 import styles from './CartItem.module.scss';
-
+import {useContext} from 'react';
+import CartContext from '../../context/cart-context.js';
 
 const CartItem = ({ cart }) => {
 
-    const { name, price, amount } = cart;
+    console.log('cart: ', cart);
+
+    const {addToCartItem} = useContext(CartContext);
+
+    const { id, name, price, amount } = cart;
 
     const {
         'cart-item': cartItem,
@@ -14,6 +19,16 @@ const CartItem = ({ cart }) => {
     } = styles;
 
     const formatPrice = new Intl.NumberFormat('ko-KR').format(price);
+
+
+    const handleAddClick = e => {
+        addToCartItem({
+            id,
+            name,
+            amount: 1, // + 버튼 누르면 하나가 추가 되야 한다.
+            price: price / amount // 가격은 합산 가격이 되어 있기 때문에 하나의 가격을 구하려면 amount로 다시 나눠줘야 한다.
+        });
+    };
 
     return (
         <li className={cartItem}>
@@ -26,7 +41,7 @@ const CartItem = ({ cart }) => {
             </div>
             <div className={actions}>
                 <button>−</button>
-                <button>+</button>
+                <button onClick={handleAddClick}>+</button>
             </div>
         </li>
     );

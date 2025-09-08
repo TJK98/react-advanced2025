@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import CartContext from './cart-context.js';
-import cartItem from "../components/Cart/CartItem.jsx";
 
 // Provider는 React Context API에서 특정 값을 context 트리 전체에 주입하는 통로
 const CartProvider = ({children}) => {
@@ -44,6 +43,11 @@ const CartProvider = ({children}) => {
         }
     };
 
+    // 장바구니 삭제 함수
+    const handleRemoveToCartItem = () => {
+
+    };
+
     // 모달을 열어주는 함수
     const handleShowCart = () => setCartIsShown(true);
 
@@ -56,7 +60,8 @@ const CartProvider = ({children}) => {
         openModal: handleShowCart,
         closeModal: handleHideCart,
         cartItems,
-        addToCartItem: handleAddToCartItem
+        addToCartItem: handleAddToCartItem,
+        removeToCartItem: handleRemoveToCartItem
     };
 
     return (
