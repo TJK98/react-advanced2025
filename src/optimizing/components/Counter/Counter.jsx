@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import IconButton from '../UI/IconButton.jsx';
-import MinusIcon from '../UI/Icons/MinusIcon.jsx';
-import PlusIcon from '../UI/Icons/PlusIcon.jsx';
-import CounterOutput from './CounterOutput.jsx';
-import { log } from '../../log.js';
+import IconButton from '../UI/IconButton';
+import MinusIcon from '../UI/Icons/MinusIcon';
+import PlusIcon from '../UI/Icons/PlusIcon';
+import CounterOutput from './CounterOutput';
+import { log } from '../../log';
 
 const isPrime = (number) => {
   log('Calculating if is prime number', 2, 'other');
@@ -25,6 +25,7 @@ const isPrime = (number) => {
 
 const Counter = ({ initialCount }) => {
   log('<Counter /> rendered', 1);
+
   const initialCountIsPrime = isPrime(initialCount);
 
   const [counter, setCounter] = useState(initialCount);
@@ -38,25 +39,27 @@ const Counter = ({ initialCount }) => {
   };
 
   return (
-    <section className='counter'>
-      <p className='counter-info'>
-        The initial counter value was <strong>{initialCount}</strong>. It{' '}
-        <strong>is {initialCountIsPrime ? 'a' : 'not a'}</strong> prime number.
-      </p>
-      <p>
-        <IconButton
-          icon={MinusIcon}
-          onClick={decrementHandler}>
-          Decrement
-        </IconButton>
-        <CounterOutput value={counter} />
-        <IconButton
-          icon={PlusIcon}
-          onClick={incrementHandler}>
-          Increment
-        </IconButton>
-      </p>
-    </section>
+      <section className='counter'>
+        <p className='counter-info'>
+          The initial counter value was <strong>{initialCount}</strong>. It{' '}
+          <strong>is {initialCountIsPrime ? 'a' : 'not a'}</strong> prime number.
+        </p>
+        <p>
+          <IconButton
+              icon={MinusIcon}
+              onClick={decrementHandler}>
+            Decrement
+          </IconButton>
+          <CounterOutput value={counter} />
+          <IconButton
+              icon={PlusIcon}
+              onClick={incrementHandler}>
+            Increment
+          </IconButton>
+        </p>
+      </section>
   );
 };
+
+// export default React.memo(Counter);
 export default Counter;
