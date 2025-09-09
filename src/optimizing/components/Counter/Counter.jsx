@@ -30,23 +30,31 @@ const Counter = ({ initialCount }) => {
   const initialCountIsPrime = isPrime(initialCount);
 
   // 카운트의 변화를 배열로 추적
-  const [counterChanges, setCounterChanges] = useState([initialCount]);
+  // key값은 바뀌지 않는 id로 설정해야 된다.
+  // 리액트는 key가 바뀌면 랜더링을 다시 한다.
+  // = useState([initialCount]);
+  const [counterChanges, setCounterChanges]
+      = useState([{id: Math.random().toString(), value: initialCount}]);
 
   // const [counter, setCounter] = useState(initialCount);
 
   const decrementHandler = useCallback(() => {
     // setCounter((prevCounter) => prevCounter - 1);
-    setCounterChanges(prev => [-1, ...prev]);
+    // setCounterChanges(prev => [-1, ...prev]);
+    setCounterChanges(prev =>
+        [{id: Math.random().toString(), value: -1}, ...prev]);
   }, []);
 
   const incrementHandler = useCallback(() => {
     // setCounter((prevCounter) => prevCounter + 1);
-    setCounterChanges(prev => [+1, ...prev]);
-
+    // setCounterChanges(prev => [+1, ...prev]);
+    setCounterChanges(prev =>
+        [{id: Math.random().toString(), value: 1}, ...prev]);
   }, []);
 
-  // 현재 카우늩 로그 배열의 총합
-  const totalCount = counterChanges.reduce((acc, curr) => acc + curr, 0);
+  // 현재 카운트 로그 배열의 총합
+  // const totalCount = counterChanges.reduce((acc, curr) => acc + curr, 0);
+  const totalCount = counterChanges.reduce((acc, curr) => acc + curr.value, 0);
 
   return (
       <section className='counter'>
